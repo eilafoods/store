@@ -50,67 +50,67 @@ const products = {
             </div>
         `
     },
-    'metabolism-booster': {
-        name: 'Metabolism Booster',
-        price: 2800,
-        originalPrice: 3300,
-        image: 'https://images.pexels.com/photos/1435735/pexels-photo-1435735.jpeg?auto=compress&cs=tinysrgb&w=600',
-        images: [
-            'https://images.pexels.com/photos/1435735/pexels-photo-1435735.jpeg?auto=compress&cs=tinysrgb&w=600',
-            'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=600',
-            'https://images.pexels.com/photos/230477/pexels-photo-230477.jpeg?auto=compress&cs=tinysrgb&w=600'
-        ],
-        shortDescription: 'A natural blend of metabolism-boosting ingredients designed to support healthy weight management.',
-        description: `
-            <p>Our Metabolism Booster is a scientifically formulated blend of natural ingredients designed to support healthy metabolism and weight management. This powerful formula works by supporting your body's natural fat-burning processes.</p>
-            <p>Unlike synthetic alternatives, our metabolism booster uses only natural, plant-based ingredients that work in harmony with your body. Each ingredient has been carefully selected based on scientific research and traditional use.</p>
-            <p>This product is designed to be part of a healthy lifestyle that includes proper nutrition and regular physical activity.</p>
-        `,
-        benefits: `
-            <ul>
-                <li><strong>Metabolic Support:</strong> Helps boost natural metabolism</li>
-                <li><strong>Energy Enhancement:</strong> Provides clean, sustained energy</li>
-                <li><strong>Fat Burning:</strong> Supports healthy fat oxidation</li>
-                <li><strong>Appetite Control:</strong> Helps manage healthy appetite</li>
-                <li><strong>Thermogenesis:</strong> Supports body's heat production</li>
-                <li><strong>Blood Sugar Support:</strong> Helps maintain healthy glucose levels</li>
-                <li><strong>Mental Focus:</strong> Supports cognitive function and alertness</li>
-            </ul>
-        `,
-        ingredients: `
-            <ul>
-                <li><strong>Green Coffee Bean Extract:</strong> Rich in chlorogenic acid</li>
-                <li><strong>Garcinia Cambogia:</strong> Supports healthy appetite</li>
-                <li><strong>Green Tea Extract:</strong> High in metabolism-boosting EGCG</li>
-                <li><strong>Cayenne Pepper:</strong> Supports thermogenesis</li>
-                <li><strong>L-Carnitine:</strong> Helps convert fat to energy</li>
-                <li><strong>Ginger Root:</strong> Supports digestion and metabolism</li>
-                <li><strong>Forskolin:</strong> Supports healthy body composition</li>
-                <li><strong>Chromium Picolinate:</strong> Supports glucose metabolism</li>
-            </ul>
-            <p><em>All ingredients are standardized extracts for maximum potency and effectiveness.</em></p>
-        `,
-        usage: `
-            <div class="usage-steps">
-                <h4>Directions for Use:</h4>
-                <ol>
-                    <li>Take 1-2 capsules 30 minutes before meals</li>
-                    <li>Start with 1 capsule daily for the first week</li>
-                    <li>Gradually increase to 2 capsules daily if well-tolerated</li>
-                    <li>Take with plenty of water (8-10 oz)</li>
-                </ol>
-                <h4>Optimization Tips:</h4>
-                <ul>
-                    <li>Take on an empty stomach for best absorption</li>
-                    <li>Combine with regular exercise for enhanced results</li>
-                    <li>Maintain a balanced, healthy diet</li>
-                    <li>Stay well hydrated throughout the day</li>
-                    <li>Avoid taking within 6 hours of bedtime</li>
-                </ul>
-                <p><strong>Caution:</strong> Do not exceed recommended dosage. Not suitable for pregnant or nursing women. Consult your healthcare provider if you have any medical conditions.</p>
-            </div>
-        `
-    }
+    // 'metabolism-booster': {
+    //     name: 'Metabolism Booster',
+    //     price: 2800,
+    //     originalPrice: 3300,
+    //     image: 'https://images.pexels.com/photos/1435735/pexels-photo-1435735.jpeg?auto=compress&cs=tinysrgb&w=600',
+    //     images: [
+    //         'https://images.pexels.com/photos/1435735/pexels-photo-1435735.jpeg?auto=compress&cs=tinysrgb&w=600',
+    //         'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=600',
+    //         'https://images.pexels.com/photos/230477/pexels-photo-230477.jpeg?auto=compress&cs=tinysrgb&w=600'
+    //     ],
+    //     shortDescription: 'A natural blend of metabolism-boosting ingredients designed to support healthy weight management.',
+    //     description: `
+    //         <p>Our Metabolism Booster is a scientifically formulated blend of natural ingredients designed to support healthy metabolism and weight management. This powerful formula works by supporting your body's natural fat-burning processes.</p>
+    //         <p>Unlike synthetic alternatives, our metabolism booster uses only natural, plant-based ingredients that work in harmony with your body. Each ingredient has been carefully selected based on scientific research and traditional use.</p>
+    //         <p>This product is designed to be part of a healthy lifestyle that includes proper nutrition and regular physical activity.</p>
+    //     `,
+    //     benefits: `
+    //         <ul>
+    //             <li><strong>Metabolic Support:</strong> Helps boost natural metabolism</li>
+    //             <li><strong>Energy Enhancement:</strong> Provides clean, sustained energy</li>
+    //             <li><strong>Fat Burning:</strong> Supports healthy fat oxidation</li>
+    //             <li><strong>Appetite Control:</strong> Helps manage healthy appetite</li>
+    //             <li><strong>Thermogenesis:</strong> Supports body's heat production</li>
+    //             <li><strong>Blood Sugar Support:</strong> Helps maintain healthy glucose levels</li>
+    //             <li><strong>Mental Focus:</strong> Supports cognitive function and alertness</li>
+    //         </ul>
+    //     `,
+    //     ingredients: `
+    //         <ul>
+    //             <li><strong>Green Coffee Bean Extract:</strong> Rich in chlorogenic acid</li>
+    //             <li><strong>Garcinia Cambogia:</strong> Supports healthy appetite</li>
+    //             <li><strong>Green Tea Extract:</strong> High in metabolism-boosting EGCG</li>
+    //             <li><strong>Cayenne Pepper:</strong> Supports thermogenesis</li>
+    //             <li><strong>L-Carnitine:</strong> Helps convert fat to energy</li>
+    //             <li><strong>Ginger Root:</strong> Supports digestion and metabolism</li>
+    //             <li><strong>Forskolin:</strong> Supports healthy body composition</li>
+    //             <li><strong>Chromium Picolinate:</strong> Supports glucose metabolism</li>
+    //         </ul>
+    //         <p><em>All ingredients are standardized extracts for maximum potency and effectiveness.</em></p>
+    //     `,
+    //     usage: `
+    //         <div class="usage-steps">
+    //             <h4>Directions for Use:</h4>
+    //             <ol>
+    //                 <li>Take 1-2 capsules 30 minutes before meals</li>
+    //                 <li>Start with 1 capsule daily for the first week</li>
+    //                 <li>Gradually increase to 2 capsules daily if well-tolerated</li>
+    //                 <li>Take with plenty of water (8-10 oz)</li>
+    //             </ol>
+    //             <h4>Optimization Tips:</h4>
+    //             <ul>
+    //                 <li>Take on an empty stomach for best absorption</li>
+    //                 <li>Combine with regular exercise for enhanced results</li>
+    //                 <li>Maintain a balanced, healthy diet</li>
+    //                 <li>Stay well hydrated throughout the day</li>
+    //                 <li>Avoid taking within 6 hours of bedtime</li>
+    //             </ul>
+    //             <p><strong>Caution:</strong> Do not exceed recommended dosage. Not suitable for pregnant or nursing women. Consult your healthcare provider if you have any medical conditions.</p>
+    //         </div>
+    //     `
+    // }
 };
 
 // DOM Elements
