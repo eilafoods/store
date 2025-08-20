@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Product - Eila Foods</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/jpeg" href="icon.jpg">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="index.html"><h2>Eila Foods</h2></a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#products">Products</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Product Hero Section -->
+    <section class="product-hero">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <a href="index.html#products">Products</a>
+                <span>/</span>
+                <span id="breadcrumb-product">Product</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Details -->
+    <section class="product-details">
+        <div class="container">
+            <div class="product-layout">
+                <div class="product-gallery">
+                    <div class="main-image">
+                        <img id="main-product-image" src="" alt="Product Image" />
+                    </div>
+                    <div class="image-thumbnails">
+                        <img class="thumbnail active" src="" alt="Product Image 1" />
+                        <img class="thumbnail" src="" alt="Product Image 2" />
+                        <img class="thumbnail" src="" alt="Product Image 3" />
+                    </div>
+                </div>
+                
+                <div class="product-info">
+                    <h1 id="product-title">Product Name</h1>
+                    <div class="product-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="rating-text">(4.9/5 - 156 reviews)</span>
+                    </div>
+                    <div class="product-price">
+                        <span class="current-price" id="product-price">PKR 0</span>
+                        <span class="original-price">PKR 3,500</span>
+                        <!-- <span class="discount">-20%</span> -->
+                    </div>
+                    <div class="product-description">
+                        <p id="product-short-description">Product description will be loaded here...</p>
+                    </div>
+                    
+                    <div class="product-features">
+                        <div class="feature-item">
+                            <i class="fas fa-leaf"></i>
+                            <span>100% Organic</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Lab Tested</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-heart"></i>
+                            <span>Health Certified</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-shipping-fast"></i>
+                            <span>Fast Delivery</span>
+                        </div>
+                    </div>
+
+                    <div class="order-section">
+                        <button id="whatsapp-order" class="whatsapp-btn">
+                            <i class="fab fa-whatsapp"></i>
+                            Order via WhatsApp
+                        </button>
+                        <p class="order-info">Click to place your order via WhatsApp with all details pre-filled!</p>
+                    </div>
+
+                    <div class="product-guarantee">
+                        <div class="guarantee-item">
+                            <i class="fas fa-undo"></i>
+                            <span>30-Day Money Back Guarantee</span>
+                        </div>
+                        <div class="guarantee-item">
+                            <i class="fas fa-truck"></i>
+                            <span>Free Delivery on Orders Above PKR 3,000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Tabs -->
+    <section class="product-tabs">
+        <div class="container">
+            <div class="tabs-navigation">
+                <button class="tab-btn active" data-tab="description">Description</button>
+                <button class="tab-btn" data-tab="benefits">Benefits</button>
+                <button class="tab-btn" data-tab="ingredients">Ingredients</button>
+                <button class="tab-btn" data-tab="usage">How to Use</button>
+            </div>
+
+            <div class="tab-content">
+                <div id="description" class="tab-pane active">
+                    <div class="content-wrapper">
+                        <h3>Product Description</h3>
+                        <div id="detailed-description">
+                            <!-- Detailed description will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+                <div id="benefits" class="tab-pane">
+                    <div class="content-wrapper">
+                        <h3>Health Benefits</h3>
+                        <div id="product-benefits">
+                            <!-- Benefits will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+                <div id="ingredients" class="tab-pane">
+                    <div class="content-wrapper">
+                        <h3>Natural Ingredients</h3>
+                        <div id="product-ingredients">
+                            <!-- Ingredients will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+                <div id="usage" class="tab-pane">
+                    <div class="content-wrapper">
+                        <h3>How to Use</h3>
+                        <div id="product-usage">
+                            <!-- Usage instructions will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Products -->
+    <section class="related-products">
+        <div class="container">
+            <h2>You Might Also Like</h2>
+            <div class="related-grid" id="related-products">
+                <!-- Related products will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Eila Foods</h3>
+                    <p>Your trusted partner in natural health and hormonal wellness.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/eilafoods.pk?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="https://wa.me/923347773198"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#products">Products</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                         <p><i class="fas fa-phone"></i><a href="tel:+923347773198">+92-334-7773198</a></p>
+                        <p><i class="fas fa-envelope"></i><a href="mailto:aleezaqamar351@gmail.com">aleezaqamar351@gmail.com</a></p>
+                        <p><i class="fas fa-map-marker-alt"></i> Pakistan</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Eila Foods | All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Load product details when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProductDetails();
+            setupProductTabs();
+            setupWhatsAppOrder();
+        });
+    </script>
+</body>
+</html>
