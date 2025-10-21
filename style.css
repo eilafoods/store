@@ -118,12 +118,12 @@ body {
 
 /* Hero Section */
 .hero {
-    min-height: 100vh;
+    min-height: 136vh;
     display: flex;
     align-items: center;
     position: relative;
 /*     background: linear-gradient(135deg, #804000 0%, #8e5a0c 100%); */
-    background-image: url("testbanner.jpg");
+    background-image: url("test_banner.jpg");
   background-repeat: no-repeat;   /* prevents tiling */
   background-size: cover;         /* makes image cover the whole screen */
   background-position: center; 
@@ -952,12 +952,12 @@ body {
 @media (max-width: 768px) {
 
     .hero {
-    min-height: 66vh;
+    min-height: 3vh;
     display: flex;
     align-items: center;
     position: relative;
 /*     background: linear-gradient(135deg, #804000 0%, #8e5a0c 100%); */
-         background-image: url("testbanner.jpg");
+         background-image: url("test_banner2.jpg");
   background-repeat: no-repeat;   /* prevents tiling */
   background-size: cover;         /* makes image cover the whole screen */
   background-position: center; 
