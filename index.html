@@ -1,289 +1,846 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eila Foods - Natural Solutions for Hormonal Health</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/jpeg" href="icon.jpg">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eila Foods | Premium Organic Diet & Health Products</title>
+<meta name="description" content="Eila Foods — organic, keto-friendly, plant-based nutrition designed for healthy living. Order fresh, clean-label wellness products online in Pakistan.">
+<meta name="keywords" content="organic food Pakistan, keto products, plant-based nutrition, healthy snacks, Eila Foods, Faisalabad organic store">
+<meta property="og:title" content="Eila Foods | Premium Organic Diet & Health Products">
+<meta property="og:description" content="Organic, keto-friendly, plant-based nutrition designed for healthy living.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌿</text></svg>">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          forest: { DEFAULT:'#14301F', 50:'#E9F0EA', 100:'#CFE0D1', 400:'#3D6B4A', 600:'#1F4A2E', 700:'#183C25', 800:'#14301F', 900:'#0D2015' },
+          cream: '#FAF3E7',
+          gold: { DEFAULT:'#D6A94A', 600:'#C4923A' },
+          sage: '#9CB48A',
+          clay: '#A8735A',
+          ink: '#1C2118'
+        },
+        fontFamily: {
+          display: ['Fraunces','serif'],
+          body: ['Inter','sans-serif']
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+  :root{ --glass-bg: rgba(250,243,231,0.55); --glass-border: rgba(255,255,255,0.45); }
+  html{ scroll-behavior:smooth; }
+  body{ background:#FAF3E7; color:#1C2118; font-family:'Inter',sans-serif; overflow-x:hidden; }
+  .font-display{ font-family:'Fraunces',serif; }
+
+  .glass{
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid var(--glass-border);
+  }
+  .glass-dark{
+    background: rgba(20,48,31,0.55);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+  .clay-shadow{
+    box-shadow: 12px 12px 28px rgba(20,48,31,0.10), -8px -8px 20px rgba(255,255,255,0.6);
+  }
+  .glow-gold{ box-shadow: 0 0 0 rgba(214,169,74,0); transition: box-shadow .4s ease, transform .4s ease; }
+  .glow-gold:hover{ box-shadow: 0 8px 30px rgba(214,169,74,0.35); transform: translateY(-4px); }
+
+  ::-webkit-scrollbar{ width:10px; }
+  ::-webkit-scrollbar-track{ background:#FAF3E7; }
+  ::-webkit-scrollbar-thumb{ background:#9CB48A; border-radius:8px; }
+
+  .blob{ position:absolute; border-radius:50%; filter: blur(60px); opacity:.35; pointer-events:none; }
+
+  /* Nutrition-label style stat widget (signature element) */
+  .nutri-card{
+    background: rgba(250,243,231,0.7);
+    border: 2px solid #14301F;
+    border-radius: 18px;
+  }
+  .nutri-row{ border-bottom: 1px solid rgba(20,48,31,0.25); }
+  .nutri-row:last-child{ border-bottom:none; }
+
+  .cart-badge{ transform: scale(0); transition: transform .25s cubic-bezier(.34,1.56,.64,1); }
+  .cart-badge.show{ transform: scale(1); }
+
+  input:focus, button:focus-visible, textarea:focus{ outline: 2px solid #D6A94A; outline-offset:2px; }
+
+  #cartDrawer{ transform: translateX(100%); transition: transform .45s cubic-bezier(.16,1,.3,1); }
+  #cartDrawer.open{ transform: translateX(0); }
+  #cartOverlay{ opacity:0; pointer-events:none; transition: opacity .35s ease; }
+  #cartOverlay.open{ opacity:1; pointer-events:auto; }
+
+  .prod-card{ transition: transform .35s ease, box-shadow .35s ease; }
+  .prod-card:hover{ transform: translateY(-6px); }
+  .prod-img-wrap{ overflow:hidden; }
+  .prod-img-wrap img{ transition: transform .6s ease; }
+  .prod-card:hover .prod-img-wrap img{ transform: scale(1.08); }
+
+  .skeleton{ background: linear-gradient(90deg, #EDE4D3 25%, #F5EDE0 37%, #EDE4D3 63%); background-size:400% 100%; animation: sk 1.4s ease infinite; }
+  @keyframes sk{ 0%{background-position:100% 50%} 100%{background-position:0 50%} }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
+  }
+
+  /* Lenis smooth scroll */
+  html.lenis{ height:auto; }
+  .lenis.lenis-smooth{ scroll-behavior:auto !important; }
+  .lenis.lenis-smooth [data-lenis-prevent]{ overscroll-behavior: contain; }
+
+  section{ scroll-margin-top: 100px; }
+
+  /* Section rhythm — consistent vertical spacing across the page */
+  .section-pad{ padding-top: 6rem; padding-bottom: 6rem; }
+  @media (min-width: 1024px){ .section-pad{ padding-top: 8rem; padding-bottom: 8rem; } }
+
+  .eyebrow{ font-size:.72rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#A8735A; }
+
+  /* Hero floating collage */
+  .hero-float{ animation: floaty 5.5s ease-in-out infinite; }
+  .hero-float-slow{ animation: floaty 7s ease-in-out infinite; animation-delay: -2s; }
+  @keyframes floaty{ 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(-16px);} }
+
+  .marquee-track{ display:flex; width:max-content; animation: marquee 26s linear infinite; }
+  @keyframes marquee{ from{ transform: translateX(0);} to{ transform: translateX(-50%);} }
+
+  /* Steps */
+  .step-num{ font-family:'Fraunces',serif; font-size:2.5rem; font-weight:600; color: rgba(20,48,31,0.14); line-height:1; }
+
+  /* Testimonial cards */
+  .stars i{ fill:#D6A94A; color:#D6A94A; }
+
+  /* Newsletter */
+  .newsletter-glow{ background: radial-gradient(600px 300px at 15% 20%, rgba(214,169,74,0.18), transparent 60%), radial-gradient(500px 300px at 85% 80%, rgba(156,180,138,0.18), transparent 60%); }
+
+  footer a{ transition: color .25s ease, opacity .25s ease; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "OnlineStore",
+  "name": "Eila Foods",
+  "description": "We provide organic, keto-friendly, plant-based nutrition designed for healthy living.",
+  "email": "aleezaqamar351@gmail.com",
+  "image": "https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=800",
+  "priceRange": "Pkr",
+  "sameAs": ["https://www.instagram.com/eilafoods.pk"],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Faisalabad",
+    "addressCountry": "PK"
+  }
+}
+</script>
 </head>
-<body>
-    <!-- Header -->
-    <header class="header">
-        <nav class="navbar">
-            <div class="nav-container">
-                <div class="nav-logo">
-                    <h2>Eila Foods</h2>
-                </div>
-                <ul class="nav-menu">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#products">Products</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-                <div class="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-        </nav>
-    </header>
+<body class="antialiased">
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <!-- <div class="hero-background">
-            <div class="floating-elements">
-                <div class="float-element"></div>
-                <div class="float-element"></div>
-                <div class="float-element"></div>
-            </div>
-        </div> -->
-        <div class="hero-content">
-<!--             <h1 class="hero-title"><span class="gradient-text">Eila Foods</span></h1>
-            <p class="hero-subtitle">Crafted by nature. Perfected for you.</p> -->
-            <div class="hero-buttons">
-                <a href="#products" class="btn-primary">Explore Products</a>
-                <a href="#about" class="btn-secondary">Learn More</a>
-            </div>
-        </div>
-        <div class="hero-image">
-            <img src="img004.jpg" alt="Healthy Food" />
-        </div>
-    </section>
+<!-- ================= NAVBAR ================= -->
+<header id="navbar" class="fixed top-0 left-0 right-0 z-40 transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+    <div class="glass rounded-2xl clay-shadow px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
+      <a href="#home" class="flex items-center gap-2 shrink-0">
+        <span class="w-9 h-9 rounded-full bg-forest flex items-center justify-center text-cream">
+          <i data-lucide="leaf" class="w-5 h-5"></i>
+        </span>
+        <span class="font-display text-xl sm:text-2xl font-semibold text-forest tracking-tight">Eila Foods</span>
+      </a>
 
-    <!-- Moving Banner -->
-    <div class="moving-banner">
-        <div class="banner-content">
-            <span>✨ Natural & Organic</span>
-            <span>🌿 Hormone-Friendly Foods</span>
-            <span>💚 Health-Focused Solutions</span>
-            <span>⭐ Premium Quality</span>
-            <span>🏆 Trusted by Thousands</span>
-            <span>✨ Natural & Organic</span>
-            <span>🌿 Hormone-Friendly Foods</span>
-            <span>💚 Health-Focused Solutions</span>
+      <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-ink/80">
+        <a href="#shop" class="hover:text-forest transition">Shop</a>
+        <a href="#about" class="hover:text-forest transition">Our Promise</a>
+        <a href="#how" class="hover:text-forest transition">How It Works</a>
+        <a href="#reels" class="hover:text-forest transition">Reels</a>
+        <a href="#visit" class="hover:text-forest transition">Visit Us</a>
+      </nav>
+
+      <div class="flex items-center gap-2 sm:gap-3">
+        <div class="relative hidden sm:block">
+          <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-ink/40"></i>
+          <input id="searchInput" type="text" placeholder="Search organic goods..."
+            class="w-40 lg:w-64 bg-white/60 border border-forest/10 rounded-full pl-9 pr-3 py-2 text-sm placeholder:text-ink/40 focus:w-56 lg:focus:w-72 transition-all">
         </div>
+        <button id="mobileSearchBtn" class="sm:hidden w-10 h-10 rounded-full bg-white/60 border border-forest/10 flex items-center justify-center">
+          <i data-lucide="search" class="w-4 h-4 text-forest"></i>
+        </button>
+        <button id="cartBtn" class="relative w-11 h-11 rounded-full bg-forest text-cream flex items-center justify-center glow-gold">
+          <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+          <span id="cartCount" class="cart-badge absolute -top-1 -right-1 bg-gold text-forest text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+        </button>
+      </div>
+    </div>
+    <div id="mobileSearchWrap" class="hidden mt-2">
+      <div class="relative">
+        <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-ink/40"></i>
+        <input id="searchInputMobile" type="text" placeholder="Search organic goods..."
+          class="w-full glass rounded-full pl-9 pr-3 py-3 text-sm placeholder:text-ink/40">
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section id="home" class="relative min-h-screen flex items-center pt-40 pb-24 overflow-hidden">
+  <div class="blob w-[420px] h-[420px] bg-sage top-[-80px] left-[-100px]"></div>
+  <div class="blob w-[380px] h-[380px] bg-gold top-[20%] right-[-120px]"></div>
+  <div class="blob w-[300px] h-[300px] bg-clay bottom-[-60px] left-[30%]"></div>
+
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative w-full text-center">
+    <div id="heroText" class="flex flex-col items-center">
+      <span class="inline-flex items-center gap-2 bg-white/60 border border-forest/10 rounded-full px-4 py-1.5 text-xs font-semibold text-forest/80 tracking-wide uppercase">
+        <i data-lucide="sprout" class="w-3.5 h-3.5"></i> Certified organic · Keto friendly
+      </span>
+      <h1 class="font-display text-5xl sm:text-6xl lg:text-8xl font-semibold text-forest leading-[1.03] mt-6">
+        Eat clean.<br><span class="italic text-clay">Feel</span> alive.
+      </h1>
+      <p class="mt-6 text-lg sm:text-xl text-ink/70 max-w-xl leading-relaxed">
+        We provide organic, keto-friendly, plant-based nutrition designed for healthy living, sourced honestly, made without compromise.
+      </p>
+      <div class="mt-9 flex flex-wrap justify-center gap-4">
+        <a href="#shop" class="bg-forest text-cream px-8 py-4 rounded-full font-semibold flex items-center gap-2 glow-gold">
+          Shop the catalog <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+        <a href="#about" class="glass px-8 py-4 rounded-full font-semibold text-forest flex items-center gap-2 clay-shadow">
+          <i data-lucide="play-circle" class="w-4 h-4"></i> Our Promise
+        </a>
+      </div>
     </div>
 
-    <!-- Statistics Section -->
-    <section class="stats">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-number" data-target="500">0</div>
-                    <div class="stat-label">Happy Customers</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" data-target="2000">0</div>
-                    <div class="stat-label">Products Sold</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" data-target="98">0</div>
-                    <div class="stat-label">Success Rate %</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" data-target="2025">0</div>
-                    <div class="stat-label">Established</div>
-                </div>
-            </div>
+    <!-- Floating produce collage -->
+    <!-- <div class="relative mt-16 sm:mt-20 h-[220px] sm:h-[280px] max-w-3xl mx-auto">
+      <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=500&q=80" alt="Organic snack jar" class="hero-float absolute left-0 sm:left-8 top-4 w-32 sm:w-44 h-32 sm:h-44 object-cover rounded-3xl clay-shadow border-4 border-cream rotate-[-8deg]">
+      <img src="https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=600&q=80" alt="Fresh organic produce" class="hero-float-slow absolute left-1/2 -translate-x-1/2 top-0 w-40 sm:w-56 h-40 sm:h-56 object-cover rounded-3xl clay-shadow border-4 border-cream z-10">
+      <img src="https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?w=500&q=80" alt="Healthy keto bowl" class="hero-float absolute right-0 sm:right-8 top-6 w-32 sm:w-44 h-32 sm:h-44 object-cover rounded-3xl clay-shadow border-4 border-cream rotate-[7deg]">
+    </div> -->
+  </div>
+
+  <a href="#trust" aria-label="Scroll down" class="absolute bottom-8 left-1/2 -translate-x-1/2 w-10 h-10 rounded-full glass flex items-center justify-center animate-bounce">
+    <i data-lucide="chevron-down" class="w-4 h-4 text-forest"></i>
+  </a>
+</section>
+
+<!-- ================= TRUST BADGES ================= -->
+<section id="trust" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+    <div class="glass clay-shadow rounded-2xl p-6 flex items-center gap-4 badge-reveal">
+      <div class="w-12 h-12 rounded-xl bg-sage/30 flex items-center justify-center shrink-0"><i data-lucide="leaf" class="w-6 h-6 text-forest"></i></div>
+      <div><h4 class="font-semibold text-forest">100% Organic</h4><p class="text-sm text-ink/60">No additives, ever.</p></div>
+    </div>
+    <div class="glass clay-shadow rounded-2xl p-6 flex items-center gap-4 badge-reveal">
+      <div class="w-12 h-12 rounded-xl bg-gold/30 flex items-center justify-center shrink-0"><i data-lucide="truck" class="w-6 h-6 text-forest"></i></div>
+      <div><h4 class="font-semibold text-forest">Express Shipping</h4><p class="text-sm text-ink/60">Delivered nationwide.</p></div>
+    </div>
+    <div class="glass clay-shadow rounded-2xl p-6 flex items-center gap-4 badge-reveal">
+      <div class="w-12 h-12 rounded-xl bg-clay/30 flex items-center justify-center shrink-0"><i data-lucide="shield-check" class="w-6 h-6 text-forest"></i></div>
+      <div><h4 class="font-semibold text-forest">Quality Tested</h4><p class="text-sm text-ink/60">Every batch verified.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BY THE NUMBERS ================= -->
+<section id="facts" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+  <div class="nutri-card clay-shadow p-6 sm:p-10">
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-3 border-b-4 border-forest pb-4 mb-2">
+      <h3 class="font-display text-2xl sm:text-3xl font-bold text-forest">Brand Facts</h3>
+      <p class="text-xs text-ink/50 uppercase tracking-wide">Per serving of Eila Foods</p>
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-5">
+      <div class="nutri-row sm:border-b-0 sm:border-r py-4 sm:py-5 px-2 text-center flex flex-col items-center justify-center gap-1">
+        <span class="font-display font-bold text-forest text-2xl">100%</span>
+        <span class="text-xs text-ink/60 font-medium">Organic Sourcing</span>
+      </div>
+      <div class="nutri-row sm:border-b-0 sm:border-r py-4 sm:py-5 px-2 text-center flex flex-col items-center justify-center gap-1">
+        <span class="font-display font-bold text-forest text-2xl">0g</span>
+        <span class="text-xs text-ink/60 font-medium">Refined Sugar</span>
+      </div>
+      <div class="nutri-row sm:border-b-0 sm:border-r py-4 sm:py-5 px-2 text-center flex flex-col items-center justify-center gap-1">
+        <span class="font-display font-bold text-forest text-2xl">24–48h</span>
+        <span class="text-xs text-ink/60 font-medium">Express Shipping</span>
+      </div>
+      <div class="py-4 sm:py-5 px-2 text-center flex flex-col items-center justify-center gap-1 border-b sm:border-b-0 sm:border-r border-forest/20">
+        <span class="font-display font-bold text-forest text-2xl">Every Lot</span>
+        <span class="text-xs text-ink/60 font-medium">Quality Tested</span>
+      </div>
+      <div class="py-4 sm:py-5 px-2 text-center flex flex-col items-center justify-center gap-1">
+        <span class="font-display font-bold text-forest text-2xl">2,400+</span>
+        <span class="text-xs text-ink/60 font-medium">Happy Households</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SHOP / CATALOG ================= -->
+<section id="shop" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 section-pad">
+  <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+    <div>
+      <span class="text-xs font-bold uppercase tracking-widest text-clay">The Catalog</span>
+      <h2 class="font-display text-4xl sm:text-5xl font-semibold text-forest mt-2">Fresh from the pantry</h2>
+    </div>
+    <p id="resultsCount" class="text-sm text-ink/60"></p>
+  </div>
+
+  <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+  <div id="emptyState" class="hidden text-center py-20">
+    <i data-lucide="search-x" class="w-10 h-10 mx-auto text-ink/30 mb-3"></i>
+    <p class="text-ink/60">No products match your search. Try a different keyword.</p>
+  </div>
+</section>
+
+<!-- ================= ABOUT / PROMISE ================= -->
+<section id="about" class="bg-forest text-cream section-pad relative overflow-hidden">
+  <div class="blob w-[500px] h-[500px] bg-sage opacity-20 top-[-150px] right-[-100px]"></div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative grid lg:grid-cols-2 gap-14 items-center">
+    <div>
+      <span class="text-xs font-bold uppercase tracking-widest text-gold">Our Promise</span>
+      <h2 class="font-display text-4xl sm:text-5xl font-semibold mt-2 leading-tight">Nutrition without the fine print.</h2>
+      <p class="mt-5 text-cream/70 leading-relaxed max-w-lg">Every product on our shelf is chosen the way we'd choose for our own kitchen, organic where it matters, keto-considerate, and free from ingredients you can't pronounce.</p>
+      <div class="mt-8 space-y-4">
+        <div class="flex gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-gold shrink-0 mt-0.5"></i><p class="text-cream/80">Sourced from trusted organic farms across Pakistan.</p></div>
+        <div class="flex gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-gold shrink-0 mt-0.5"></i><p class="text-cream/80">Packed fresh, delivered within 24–48 hours.</p></div>
+        <div class="flex gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-gold shrink-0 mt-0.5"></i><p class="text-cream/80">Every batch tested for purity and consistency.</p></div>
+      </div>
+    </div>
+    <!-- <div class="glass-dark rounded-3xl p-8 clay-shadow">
+      <img src="https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=900&q=80" alt="Organic produce" class="rounded-2xl w-full h-72 object-cover">
+    </div> -->
+  </div>
+</section>
+
+<!-- ================= HOW IT WORKS ================= -->
+<section id="how" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 section-pad">
+  <div class="text-center mb-14 reveal">
+    <span class="eyebrow">Simple by design</span>
+    <h2 class="font-display text-4xl sm:text-5xl font-semibold text-forest mt-2">How ordering works</h2>
+    <p class="text-ink/60 mt-3 max-w-md mx-auto">No accounts, no clutter, just three steps between you and your next healthy habit.</p>
+  </div>
+  <div class="grid sm:grid-cols-3 gap-8 relative">
+    <div class="reveal glass rounded-3xl clay-shadow p-7 text-left">
+      <span class="step-num">01</span>
+      <div class="w-11 h-11 rounded-xl bg-sage/30 flex items-center justify-center mt-3 mb-4"><i data-lucide="search" class="w-5 h-5 text-forest"></i></div>
+      <h3 class="font-display text-xl font-semibold text-forest">Browse the catalog</h3>
+      <p class="text-sm text-ink/60 mt-2 leading-relaxed">Search or scroll through organic, keto-friendly picks and add what you need to your cart.</p>
+    </div>
+    <div class="reveal glass rounded-3xl clay-shadow p-7 text-left">
+      <span class="step-num">02</span>
+      <div class="w-11 h-11 rounded-xl bg-gold/30 flex items-center justify-center mt-3 mb-4"><i data-lucide="message-circle" class="w-5 h-5 text-forest"></i></div>
+      <h3 class="font-display text-xl font-semibold text-forest">Checkout on WhatsApp</h3>
+      <p class="text-sm text-ink/60 mt-2 leading-relaxed">Share your delivery details and we'll confirm your order and total, right in chat.</p>
+    </div>
+    <div class="reveal glass rounded-3xl clay-shadow p-7 text-left">
+      <span class="step-num">03</span>
+      <div class="w-11 h-11 rounded-xl bg-clay/30 flex items-center justify-center mt-3 mb-4"><i data-lucide="package-check" class="w-5 h-5 text-forest"></i></div>
+      <h3 class="font-display text-xl font-semibold text-forest">Delivered fresh</h3>
+      <p class="text-sm text-ink/60 mt-2 leading-relaxed">Your order is packed with care and delivered to your door within 24–48 hours.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TESTIMONIALS ================= -->
+<section id="testimonials" class="bg-sage/10 section-pad overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-14 reveal">
+      <span class="eyebrow">Word of mouth</span>
+      <h2 class="font-display text-4xl sm:text-5xl font-semibold text-forest mt-2">Loved by healthy households</h2>
+    </div>
+    <div class="grid sm:grid-cols-3 gap-6">
+      <div class="reveal glass clay-shadow rounded-3xl p-7">
+        <div class="stars flex gap-1 mb-4">
+          <i data-lucide="star" class="w-4 h-4"></i><i data-lucide="star" class="w-4 h-4"></i><i data-lucide="star" class="w-4 h-4"></i><i data-lucide="star" class="w-4 h-4"></i><i data-lucide="star" class="w-4 h-4"></i>
         </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2>About Eila Foods</h2>
-                    <p class="lead">Welcome to Eila Foods, your partner in nourishing wellness! We offer a range of organic food products carefully crafted to support hormonal balance and promote a healthy lifestyle. Our mission is to empower individuals to take control of their well-being through mindful eating and sustainable food choices. With Eila Foods, discover the power of nature's goodness in every bite and embark on a journey towards optimal health and vitality.</p>
-                    <div class="features">
-                        <div class="feature">
-                            <i class="fas fa-leaf"></i>
-                            <div>
-                                <h4>100% Organic</h4>
-                                <p>All our products are made from certified organic ingredients</p>
-                            </div>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-heart"></i>
-                            <div>
-                                <h4>Health Focused</h4>
-                                <p>Specifically designed to support hormonal balance and wellness</p>
-                            </div>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-award"></i>
-                            <div>
-                                <h4>Premium Quality</h4>
-                                <p>Rigorous quality control ensures the best products for you</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-image">
-                    <img src="img001.jpg" alt="About Eila Foods" />
-                </div>
-            </div>
+        <p class="text-ink/75 leading-relaxed">"Switched our whole pantry to Eila Foods. The keto snacks actually taste good, and delivery is always on time."</p>
+        <div class="flex items-center gap-3 mt-5">
+          <span class="w-10 h-10 rounded-full bg-forest text-cream flex items-center justify-center font-display font-semibold">S</span>
+          <div><p class="font-semibold text-forest text-sm">Sana R.</p><p class="text-xs text-ink/50">Islamabad</p></div>
         </div>
-    </section>
-
-    <!-- Products Section -->
-    <section id="products" class="products">
-        <div class="container">
-            <div class="section-header">
-                <h2>Our Premium Products</h2>
-                <p>Carefully crafted solutions for your hormonal health journey</p>
-            </div>
-            <div class="products-grid">
-                <div class="product-card" data-product="hormone-balance-tea">
-                    <div class="product-image">
-                        <img src="st1.jpg" alt="Hormone Balance Tea" />
-                        <div class="product-overlay">
-                            <button class="view-product">View Details</button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Spearmint Tea</h3>
-                        <p>Eila Foods' Spearmint Tea is a natural remedy that helps alleviate PCOS symptoms and hormonal imbalances. Enjoy the calming benefits of spearmint tea, perfect for promoting overall well-being. </p>
-                        <div class="price">PKR 1,200</div>
-                    </div>
-                </div>
-
-                <div class="product-card" data-product="pcos-support-mix">
-                    <div class="product-image">
-                        <img src="bg1.jpg" alt="PCOS Support Mix" />
-                        <div class="product-overlay">
-                            <button class="view-product">View Details</button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Bloom Granola</h3>
-                        <p>Eila Foods' Granola is a crunchy blend of wholesome oats, nutritious seeds, and nuts, perfect for a healthy breakfast or snack. Rich in fiber and protein, it keeps you energized and satisfied throughout the day.</p>
-                        <div class="price">PKR 1,250</div>
-                    </div>
-                </div>
-<!-- 
-                <div class="product-card" data-product="metabolism-booster">
-                    <div class="product-image">
-                        <img src="https://images.pexels.com/photos/1435735/pexels-photo-1435735.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Metabolism Booster" />
-                        <div class="product-overlay">
-                            <button class="view-product">View Details</button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Metabolism Booster</h3>
-                        <p>Natural ingredients to boost metabolism and support weight management</p>
-                        <div class="price">PKR 2,800</div>
-                    </div>
-                </div> -->
-            </div>
+      </div>
+      <div class="reveal glass clay-shadow rounded-3xl p-7">
+        <div class="stars flex gap-1 mb-4">
+          <i data-lucide="star" class="w-4 h-4"></i><i data-lucide="star" class="w-4 h-4"></i><i data-lucide="star" class="w-4 h-4"></i><i data-lucide="star" class="w-4 h-4"></i><i data-lucide="star" class="w-4 h-4"></i>
         </div>
-    </section>
-
-    <!-- Instagram Section -->
-    <section class="instagram">
-        <div class="container">
-            <div class="section-header">
-                <h2>Follow Our Journey</h2>
-                <p>Stay updated with our latest health tips and product insights</p>
-            </div>
-            <div class="instagram-embed">
-        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DLSFz-pMwUw/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:16px;"> <a href="https://www.instagram.com/reel/DLSFz-pMwUw/?utm_source=ig_embed&amp;utm_campaign=loading" style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"> <div style=" display: flex; flex-direction: row; align-items: center;"> <div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;"></div></div></div><div style="padding: 19% 0;"></div> <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"><svg width="50px" height="50px" viewBox="0 0 60 60" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-511.000000, -20.000000)" fill="#000000"><g><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"></path></g></g></g></svg></div><div style="padding-top: 8px;"> <div style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">View this post on Instagram</div></div><div style="padding: 12.5% 0;"></div> <div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;"><div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);"></div> <div style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;"></div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);"></div></div><div style="margin-left: 8px;"> <div style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;"></div> <div style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)"></div></div><div style="margin-left: auto;"> <div style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);"></div> <div style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);"></div> <div style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);"></div></div></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;"></div></div></a><p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;"><a href="https://www.instagram.com/reel/DLSFz-pMwUw/?utm_source=ig_embed&amp;utm_campaign=loading" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank">A post shared by EILA FOODS| Pure &amp; Organic (@eilafoods.pk)</a></p></div></blockquote>
-<script async src="//www.instagram.com/embed.js"></script>
-        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DNTx-eDsoak/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:16px;"> <a href="https://www.instagram.com/reel/DNTx-eDsoak/?utm_source=ig_embed&amp;utm_campaign=loading" style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"> <div style=" display: flex; flex-direction: row; align-items: center;"> <div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;"></div></div></div><div style="padding: 19% 0;"></div> <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"><svg width="50px" height="50px" viewBox="0 0 60 60" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-511.000000, -20.000000)" fill="#000000"><g><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"></path></g></g></g></svg></div><div style="padding-top: 8px;"> <div style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">View this post on Instagram</div></div><div style="padding: 12.5% 0;"></div> <div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;"><div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);"></div> <div style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;"></div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);"></div></div><div style="margin-left: 8px;"> <div style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;"></div> <div style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)"></div></div><div style="margin-left: auto;"> <div style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);"></div> <div style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);"></div> <div style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);"></div></div></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;"></div></div></a><p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;"><a href="https://www.instagram.com/reel/DNTx-eDsoak/?utm_source=ig_embed&amp;utm_campaign=loading" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank">A post shared by EILA FOODS| Pure &amp; Organic (@eilafoods.pk)</a></p></div></blockquote>
-<script async src="//www.instagram.com/embed.js"></script>
-        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DNNoVMkse4P/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:16px;"> <a href="https://www.instagram.com/reel/DNNoVMkse4P/?utm_source=ig_embed&amp;utm_campaign=loading" style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"> <div style=" display: flex; flex-direction: row; align-items: center;"> <div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;"></div></div></div><div style="padding: 19% 0;"></div> <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"><svg width="50px" height="50px" viewBox="0 0 60 60" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-511.000000, -20.000000)" fill="#000000"><g><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"></path></g></g></g></svg></div><div style="padding-top: 8px;"> <div style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">View this post on Instagram</div></div><div style="padding: 12.5% 0;"></div> <div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;"><div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);"></div> <div style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;"></div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);"></div></div><div style="margin-left: 8px;"> <div style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;"></div> <div style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)"></div></div><div style="margin-left: auto;"> <div style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);"></div> <div style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);"></div> <div style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);"></div></div></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;"></div></div></a><p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;"><a href="https://www.instagram.com/reel/DNNoVMkse4P/?utm_source=ig_embed&amp;utm_campaign=loading" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank">A post shared by EILA FOODS| Pure &amp; Organic (@eilafoods.pk)</a></p></div></blockquote>
-<script async src="//www.instagram.com/embed.js"></script>
-            </div>
+        <p class="text-ink/75 leading-relaxed">"Ordering over WhatsApp is so easy, no app, no signup. Just message and it's at my door in two days."</p>
+        <div class="flex items-center gap-3 mt-5">
+          <span class="w-10 h-10 rounded-full bg-forest text-cream flex items-center justify-center font-display font-semibold">H</span>
+          <div><p class="font-semibold text-forest text-sm">Hamza K.</p><p class="text-xs text-ink/50">Faisalabad</p></div>
         </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="testimonials">
-        <div class="container">
-            <div class="section-header">
-                <h2>What Our Customers Say</h2>
-            </div>
-            <div class="testimonials-slider">
-                <div class="testimonial active">
-                    <div class="testimonial-content">
-                        <p>"Eila Foods products have been a game-changer for my PCOS management. I feel more balanced and energetic!"</p>
-                        <div class="testimonial-author">
-                            <strong>Ayesha K.</strong>
-                            <span>Verified Customer</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial">
-                    <div class="testimonial-content">
-                        <p>"The Hormone Balance Tea is amazing! It's become an essential part of my daily routine."</p>
-                        <div class="testimonial-author">
-                            <strong>Maria S.</strong>
-                            <span>Verified Customer</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial">
-                    <div class="testimonial-content">
-                        <p>"Natural, effective, and delicious. Exactly what I was looking for to support my health journey."</p>
-                        <div class="testimonial-author">
-                            <strong>Fatima A.</strong>
-                            <span>Verified Customer</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="reveal glass clay-shadow rounded-3xl p-7">
+        <div class="stars flex gap-1 mb-4">
+          <i data-lucide="star" class="w-4 h-4"></i><i data-lucide="star" class="w-4 h-4"></i><i data-lucide="star" class="w-4 h-4"></i><i data-lucide="star" class="w-4 h-4"></i><i data-lucide="star" class="w-4 h-4"></i>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contact" class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Eila Foods</h3>
-                    <p>Your trusted partner in natural health and hormonal wellness. We're committed to providing the highest quality organic products.</p>
-                    <div class="social-links">
-                        <a href="https://www.instagram.com/eilafoods.pk?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="https://wa.me/923347773198"><i class="fab fa-whatsapp"></i></a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#products">Products</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Contact Info</h4>
-                    <div class="contact-info">
-                        <p><i class="fas fa-phone"></i><a href="tel:+923347773198">+92-334-7773198</a></p>
-                        <p><i class="fas fa-envelope"></i><a href="mailto:aleezaqamar351@gmail.com">aleezaqamar351@gmail.com</a></p>
-                        <p><i class="fas fa-map-marker-alt"></i> Pakistan</p>
-                    </div>
-                </div>
-                <!-- <div class="footer-section">
-                    <h4>Health Tips</h4>
-                    <p>Subscribe to get weekly health tips and product updates delivered to your inbox.</p>
-                    <div class="newsletter">
-                        <input type="email" placeholder="Your email">
-                        <button>Subscribe</button>
-                    </div>
-                </div> -->
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Eila Foods | All rights reserved.</p>
-            </div>
+        <p class="text-ink/75 leading-relaxed">"You can genuinely taste the difference. Clean labels, honest sourcing, this is what organic should feel like."</p>
+        <div class="flex items-center gap-3 mt-5">
+          <span class="w-10 h-10 rounded-full bg-forest text-cream flex items-center justify-center font-display font-semibold">A</span>
+          <div><p class="font-semibold text-forest text-sm">Ayesha M.</p><p class="text-xs text-ink/50">Lahore</p></div>
         </div>
-    </footer>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <script src="script.js"></script>
+<!-- ================= REELS ================= -->
+<section id="reels" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 section-pad">
+  <div class="text-center mb-12">
+    <span class="text-xs font-bold uppercase tracking-widest text-clay">Follow Along</span>
+    <h2 class="font-display text-4xl sm:text-5xl font-semibold text-forest mt-2">See Eila Foods in motion</h2>
+    <a href="https://www.instagram.com/eilafoods.pk" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-forest font-medium mt-3 hover:text-clay transition">
+      <i data-lucide="instagram" class="w-4 h-4"></i> @eilafoods.pk
+    </a>
+  </div>
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+    <div class="glass rounded-2xl overflow-hidden clay-shadow aspect-[9/16]">
+      <iframe src="https://www.instagram.com/reel/DLSFz-pMwUw/embed" class="w-full h-full" frameborder="0" scrolling="no" allowtransparency="true" loading="lazy"></iframe>
+    </div>
+    <div class="glass rounded-2xl overflow-hidden clay-shadow aspect-[9/16]">
+      <iframe src="https://www.instagram.com/reel/DNTx-eDsoak/embed" class="w-full h-full" frameborder="0" scrolling="no" allowtransparency="true" loading="lazy"></iframe>
+    </div>
+    <div class="glass rounded-2xl overflow-hidden clay-shadow aspect-[9/16]">
+      <iframe src="https://www.instagram.com/reel/DNNoVMkse4P/embed" class="w-full h-full" frameborder="0" scrolling="no" allowtransparency="true" loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ================= VISIT US ================= -->
+<section id="visit" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 section-pad pt-0">
+  <div class="grid lg:grid-cols-2 gap-8 items-stretch">
+    <div class="glass rounded-3xl clay-shadow p-8 sm:p-10 flex flex-col justify-center">
+      <span class="text-xs font-bold uppercase tracking-widest text-clay">Visit Us</span>
+      <h2 class="font-display text-3xl sm:text-4xl font-semibold text-forest mt-2">National Incubation Center, Faisalabad</h2>
+      <p class="text-ink/60 mt-4">Have a question or want to see our products in person? Drop by or reach out directly.</p>
+      <div class="mt-6 space-y-3">
+        <a href="mailto:aleezaqamar351@gmail.com" class="flex items-center gap-3 text-ink/80 hover:text-forest transition"><i data-lucide="mail" class="w-4 h-4 text-clay"></i> aleezaqamar351@gmail.com</a>
+        <a href="https://wa.me/923347773198" target="_blank" class="flex items-center gap-3 text-ink/80 hover:text-forest transition"><i data-lucide="phone" class="w-4 h-4 text-clay"></i> +92 334 7773198</a>
+        <a href="https://www.instagram.com/eilafoods.pk" target="_blank" class="flex items-center gap-3 text-ink/80 hover:text-forest transition"><i data-lucide="instagram" class="w-4 h-4 text-clay"></i> @eilafoods.pk</a>
+      </div>
+    </div>
+    <div class="rounded-3xl overflow-hidden clay-shadow min-h-[320px]">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3311.25909593936!2d73.0677592753713!3d31.432120951497144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3922434df39a8fd7%3A0x8d982a51bbd54b84!2sNational%20Incubation%20Center%2C%20Faisalabad%20(NICF)!5e1!3m2!1sen!2s!4v1786086792637!5m2!1sen!2s" width="100%" height="100%" style="border:0; min-height:320px;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ================= NEWSLETTER ================= -->
+<!-- <section class="relative newsletter-glow py-20 sm:py-24 overflow-hidden">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
+    <span class="eyebrow">Stay nourished</span>
+    <h2 class="font-display text-4xl sm:text-5xl font-semibold text-forest mt-2">Get fresh drops in your inbox</h2>
+    <p class="text-ink/60 mt-3 max-w-md mx-auto">New arrivals, recipes, and small-batch restocks, no spam, unsubscribe anytime.</p>
+    <form id="newsletterForm" class="mt-8 flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+      <input required type="email" placeholder="you@email.com" class="flex-1 bg-white/70 border border-forest/15 rounded-full px-5 py-3.5 text-sm">
+      <button type="submit" class="bg-forest text-cream px-7 py-3.5 rounded-full font-semibold flex items-center justify-center gap-2 glow-gold shrink-0">
+        Subscribe <i data-lucide="send" class="w-4 h-4"></i>
+      </button>
+    </form>
+  </div>
+</section> -->
+
+<section class="relative newsletter-glow py-20 sm:py-24 overflow-hidden">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
+    <span class="eyebrow">Taste</span>
+    <h2 class="font-display text-4xl sm:text-5xl font-semibold text-forest mt-2">Made with Love, Served with Flavor</h2>
+    <p class="text-ink/60 mt-3 max-w-md mx-auto">From quality ingredients to delicious recipes, Eila Foods brings you fresh, flavorful food made to make every bite worth remembering.</p>
+    <!-- <form id="newsletterForm" class="mt-8 flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+      <input required type="email" placeholder="you@email.com" class="flex-1 bg-white/70 border border-forest/15 rounded-full px-5 py-3.5 text-sm">
+      <button type="submit" class="bg-forest text-cream px-7 py-3.5 rounded-full font-semibold flex items-center justify-center gap-2 glow-gold shrink-0">
+        Subscribe <i data-lucide="send" class="w-4 h-4"></i>
+      </button>
+    </form> -->
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="bg-forest text-cream/70 pt-20 pb-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 pb-14 border-b border-cream/10">
+
+      <div class="col-span-2">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="w-9 h-9 rounded-full bg-cream/10 flex items-center justify-center"><i data-lucide="leaf" class="w-5 h-5 text-gold"></i></span>
+          <span class="font-display text-xl font-semibold text-cream">Eila Foods</span>
+        </div>
+        <p class="text-sm leading-relaxed max-w-xs">We provide organic, keto-friendly, plant-based nutrition designed for healthy living, sourced honestly, made without compromise.</p>
+        <div class="flex items-center gap-3 mt-6">
+          <a href="https://www.instagram.com/eilafoods.pk" target="_blank" aria-label="Instagram" class="w-10 h-10 rounded-full bg-cream/10 flex items-center justify-center hover:bg-gold hover:text-forest text-cream"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+          <a href="https://wa.me/923347773198" target="_blank" aria-label="WhatsApp" class="w-10 h-10 rounded-full bg-cream/10 flex items-center justify-center hover:bg-gold hover:text-forest text-cream"><i data-lucide="message-circle" class="w-4 h-4"></i></a>
+          <a href="mailto:aleezaqamar351@gmail.com" aria-label="Email" class="w-10 h-10 rounded-full bg-cream/10 flex items-center justify-center hover:bg-gold hover:text-forest text-cream"><i data-lucide="mail" class="w-4 h-4"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="font-display text-cream font-semibold mb-4">Explore</h4>
+        <ul class="space-y-2.5 text-sm">
+          <li><a href="#home" class="hover:text-cream">Home</a></li>
+          <li><a href="#shop" class="hover:text-cream">Shop</a></li>
+          <li><a href="#about" class="hover:text-cream">Our Promise</a></li>
+          <li><a href="#how" class="hover:text-cream">How It Works</a></li>
+          <li><a href="#reels" class="hover:text-cream">Reels</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-display text-cream font-semibold mb-4">Categories</h4>
+        <ul class="space-y-2.5 text-sm">
+          <li><a href="#shop" class="hover:text-cream">Keto Snacks</a></li>
+          <li><a href="#shop" class="hover:text-cream">Plant-Based Staples</a></li>
+          <li><a href="#shop" class="hover:text-cream">Organic Pantry</a></li>
+          <li><a href="#shop" class="hover:text-cream">Wellness Bundles</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-display text-cream font-semibold mb-4">Get in Touch</h4>
+        <ul class="space-y-2.5 text-sm">
+          <li class="flex items-start gap-2"><i data-lucide="map-pin" class="w-4 h-4 mt-0.5 text-gold shrink-0"></i> NIC, Faisalabad</li>
+          <li class="flex items-start gap-2"><i data-lucide="phone" class="w-4 h-4 mt-0.5 text-gold shrink-0"></i> +92 334 7773198</li>
+          <li class="flex items-start gap-2"><i data-lucide="mail" class="w-4 h-4 mt-0.5 text-gold shrink-0"></i> aleezaqamar351@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm">
+      <p>© 2026 Eila Foods. All rights reserved.</p>
+      <div class="flex items-center gap-6">
+        <a href="#visit" class="hover:text-cream">Visit Us</a>
+        <a href="admin.html" class="text-cream/40 hover:text-cream/70">Admin</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= FLOATING WHATSAPP ================= -->
+<a href="https://wa.me/923347773198" target="_blank" aria-label="Chat on WhatsApp"
+  class="fixed bottom-6 left-6 z-40 w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-xl hover:scale-110 transition-transform">
+  <i data-lucide="message-circle" class="w-6 h-6"></i>
+</a>
+
+<!-- ================= CART DRAWER ================= -->
+<div id="cartOverlay" class="fixed inset-0 bg-ink/40 backdrop-blur-sm z-50"></div>
+<aside id="cartDrawer" class="fixed top-0 right-0 h-full w-full sm:w-[420px] z-50 glass shadow-2xl flex flex-col">
+  <div class="flex items-center justify-between p-6 border-b border-forest/10">
+    <h3 class="font-display text-2xl font-semibold text-forest flex items-center gap-2"><i data-lucide="shopping-bag" class="w-5 h-5"></i> Your Cart</h3>
+    <button id="closeCart" class="w-9 h-9 rounded-full bg-white/60 flex items-center justify-center"><i data-lucide="x" class="w-4 h-4 text-forest"></i></button>
+  </div>
+  <div id="cartItems" class="flex-1 overflow-y-auto p-6 space-y-4"></div>
+  <div id="cartEmpty" class="hidden flex-1 flex flex-col items-center justify-center text-center px-6">
+    <i data-lucide="shopping-bag" class="w-10 h-10 text-ink/20 mb-3"></i>
+    <p class="text-ink/50">Your cart is empty. Add something nourishing.</p>
+  </div>
+  <div class="p-6 border-t border-forest/10 space-y-2 bg-white/30">
+    <div class="flex justify-between text-sm text-ink/70"><span>Subtotal</span><span id="subtotal">Pkr 0</span></div>
+    <div class="flex justify-between text-sm text-ink/70"><span>Shipping</span><span id="shippingCost">Pkr 200</span></div>
+    <div class="flex justify-between font-display font-bold text-lg text-forest pt-2 border-t border-forest/10"><span>Total</span><span id="totalCost">Pkr 0</span></div>
+    <button id="checkoutBtn" class="w-full mt-3 bg-forest text-cream py-3.5 rounded-full font-semibold flex items-center justify-center gap-2 glow-gold">
+      Proceed to Checkout <i data-lucide="arrow-right" class="w-4 h-4"></i>
+    </button>
+  </div>
+</aside>
+
+<!-- ================= CHECKOUT MODAL ================= -->
+<div id="checkoutOverlay" class="fixed inset-0 bg-ink/50 backdrop-blur-sm z-[60] hidden items-center justify-center p-4">
+  <div class="glass rounded-3xl clay-shadow max-w-md w-full p-7 sm:p-8 max-h-[90vh] overflow-y-auto">
+    <div class="flex items-center justify-between mb-5">
+      <h3 class="font-display text-2xl font-semibold text-forest">Delivery Details</h3>
+      <button id="closeCheckout" class="w-9 h-9 rounded-full bg-white/60 flex items-center justify-center"><i data-lucide="x" class="w-4 h-4 text-forest"></i></button>
+    </div>
+    <form id="checkoutForm" class="space-y-4">
+      <div>
+        <label class="text-xs font-semibold text-ink/60 uppercase tracking-wide">Full Name</label>
+        <input required name="name" type="text" class="w-full mt-1.5 bg-white/70 border border-forest/15 rounded-xl px-4 py-3 text-sm" placeholder="Your full name">
+      </div>
+      <div>
+        <label class="text-xs font-semibold text-ink/60 uppercase tracking-wide">Delivery Address</label>
+        <textarea required name="address" rows="2" class="w-full mt-1.5 bg-white/70 border border-forest/15 rounded-xl px-4 py-3 text-sm" placeholder="House, street, city"></textarea>
+      </div>
+      <div>
+        <label class="text-xs font-semibold text-ink/60 uppercase tracking-wide">Contact Phone Number</label>
+        <input required name="phone" type="tel" class="w-full mt-1.5 bg-white/70 border border-forest/15 rounded-xl px-4 py-3 text-sm" placeholder="03XX-XXXXXXX">
+      </div>
+      <div>
+        <label class="text-xs font-semibold text-ink/60 uppercase tracking-wide">Order Notes (Optional)</label>
+        <textarea name="notes" rows="2" class="w-full mt-1.5 bg-white/70 border border-forest/15 rounded-xl px-4 py-3 text-sm" placeholder="Any preferences?"></textarea>
+      </div>
+      <button type="submit" class="w-full bg-[#25D366] text-white py-3.5 rounded-full font-semibold flex items-center justify-center gap-2 mt-2">
+        <i data-lucide="message-circle" class="w-4 h-4"></i> Send Order via WhatsApp
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- ================= TOAST ================= -->
+<div id="toast" class="fixed bottom-6 right-6 z-[70] glass rounded-2xl clay-shadow px-5 py-3 flex items-center gap-2 text-forest font-medium opacity-0 pointer-events-none translate-y-4"></div>
+
+<script type="module">
+  import { supabase, PRODUCTS_TABLE, BRAND } from './supabase-config.js';
+
+  lucide.createIcons();
+  gsap.registerPlugin(ScrollTrigger);
+
+  // -------- Lenis smooth scroll --------
+  const lenis = new Lenis({ duration: 1.1, smoothWheel: true, easing: t => 1 - Math.pow(1 - t, 3) });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time) => lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      if (id.length > 1 && document.querySelector(id)){
+        e.preventDefault();
+        lenis.scrollTo(id, { offset: -90, duration: 1.2 });
+      }
+    });
+  });
+
+  // -------- Generic scroll reveals --------
+  gsap.utils.toArray('.reveal').forEach((el, i) => {
+    gsap.from(el, { opacity:0, y:36, duration:0.7, delay:(i%3)*0.08, ease:'power3.out',
+      scrollTrigger:{ trigger: el, start:'top 88%' } });
+  });
+
+  // -------- Newsletter --------
+  const newsletterForm = document.getElementById('newsletterForm');
+  if (newsletterForm){
+    newsletterForm.addEventListener('submit', e => {
+      e.preventDefault();
+      toast('Subscribed! Welcome to Eila Foods', 'sparkles');
+      newsletterForm.reset();
+    });
+  }
+
+  // -------- Nav scroll shrink --------
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scale-[0.99]', window.scrollY > 40);
+  });
+
+  // -------- Mobile search toggle --------
+  document.getElementById('mobileSearchBtn').addEventListener('click', () => {
+    document.getElementById('mobileSearchWrap').classList.toggle('hidden');
+  });
+
+  // -------- State --------
+  let PRODUCTS = [];
+  let CART = JSON.parse(localStorage.getItem('eila_cart') || '[]');
+
+  function money(n){ return `${BRAND.currency} ${Number(n).toLocaleString()}`; }
+  function toast(msg, icon='check-circle'){
+    const el = document.getElementById('toast');
+    el.innerHTML = `<i data-lucide="${icon}" class="w-4 h-4 text-gold"></i> ${msg}`;
+    lucide.createIcons();
+    el.classList.remove('opacity-0','translate-y-4');
+    clearTimeout(window.__t);
+    window.__t = setTimeout(()=> el.classList.add('opacity-0','translate-y-4'), 2200);
+  }
+
+  // -------- Fetch products --------
+  async function loadProducts(){
+    const grid = document.getElementById('productGrid');
+    grid.innerHTML = Array.from({length:8}).map(()=>`
+      <div class="rounded-2xl overflow-hidden glass clay-shadow">
+        <div class="skeleton h-48 w-full"></div>
+        <div class="p-4 space-y-2"><div class="skeleton h-4 w-3/4 rounded"></div><div class="skeleton h-4 w-1/2 rounded"></div></div>
+      </div>`).join('');
+
+    const { data, error } = await supabase.from(PRODUCTS_TABLE).select('title, price, desc, img');
+    if (error){ console.error(error); grid.innerHTML = `<p class="col-span-full text-center text-ink/50 py-10">Could not load products right now.</p>`; return; }
+    PRODUCTS = data || [];
+    renderProducts(PRODUCTS);
+  }
+
+  function renderProducts(list){
+    const grid = document.getElementById('productGrid');
+    const empty = document.getElementById('emptyState');
+    document.getElementById('resultsCount').textContent = `${list.length} product${list.length===1?'':'s'}`;
+
+    if (!list.length){ grid.innerHTML=''; empty.classList.remove('hidden'); return; }
+    empty.classList.add('hidden');
+
+    grid.innerHTML = list.map((p, i) => `
+      <div class="prod-card glass rounded-2xl overflow-hidden clay-shadow" data-idx="${i}">
+        <div class="prod-img-wrap h-48 bg-sage/10">
+          <img src="${p.img || 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=600&q=80'}" alt="${escapeHtml(p.title)}" class="w-full h-full object-cover" loading="lazy">
+        </div>
+        <div class="p-5">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-clay">Organic</span>
+          <h3 class="font-display font-semibold text-lg text-forest mt-1 leading-snug">${escapeHtml(p.title)}</h3>
+          <p class="text-xs text-ink/50 mt-1 line-clamp-2">${escapeHtml(p.desc || '')}</p>
+          <div class="flex items-center justify-between mt-4">
+            <span class="font-display font-bold text-forest text-lg">${money(p.price)}</span>
+            <button class="addToCart bg-forest text-cream w-10 h-10 rounded-full flex items-center justify-center glow-gold" data-title="${escapeAttr(p.title)}">
+              <i data-lucide="plus" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+    lucide.createIcons();
+
+    document.querySelectorAll('.addToCart').forEach(btn => {
+      btn.addEventListener('click', () => addToCart(btn.dataset.title));
+    });
+
+    gsap.utils.toArray('.prod-card').forEach((card, i) => {
+      gsap.from(card, { opacity:0, y:30, duration:0.6, delay: i*0.04, ease:'power2.out',
+        scrollTrigger: { trigger: card, start:'top 90%' } });
+    });
+  }
+
+  function escapeHtml(s){ return (s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function escapeAttr(s){ return escapeHtml(s).replace(/`/g,'&#96;'); }
+
+  // -------- Live search --------
+  function filterProducts(q){
+    q = q.trim().toLowerCase();
+    if (!q) return renderProducts(PRODUCTS);
+    renderProducts(PRODUCTS.filter(p => p.title.toLowerCase().includes(q) || (p.desc||'').toLowerCase().includes(q)));
+  }
+  document.getElementById('searchInput').addEventListener('input', e => filterProducts(e.target.value));
+  document.getElementById('searchInputMobile').addEventListener('input', e => filterProducts(e.target.value));
+
+  // -------- Cart logic --------
+  function saveCart(){ localStorage.setItem('eila_cart', JSON.stringify(CART)); renderCart(); }
+
+  function addToCart(title){
+    const product = PRODUCTS.find(p => p.title === title);
+    if (!product) return;
+    const existing = CART.find(c => c.title === title);
+    if (existing) existing.qty += 1;
+    else CART.push({ title: product.title, price: product.price, img: product.img, qty: 1 });
+    saveCart();
+    toast(`${title} added to cart`, 'shopping-bag');
+    gsap.fromTo('#cartBtn', {scale:1}, {scale:1.15, duration:0.15, yoyo:true, repeat:1});
+  }
+
+  function changeQty(title, delta){
+    const item = CART.find(c => c.title === title);
+    if (!item) return;
+    item.qty += delta;
+    if (item.qty <= 0) CART = CART.filter(c => c.title !== title);
+    saveCart();
+  }
+
+  function removeItem(title){
+    CART = CART.filter(c => c.title !== title);
+    saveCart();
+  }
+
+  function renderCart(){
+    const wrap = document.getElementById('cartItems');
+    const emptyEl = document.getElementById('cartEmpty');
+    const countEl = document.getElementById('cartCount');
+    const totalQty = CART.reduce((s,c)=>s+c.qty,0);
+
+    countEl.textContent = totalQty;
+    countEl.classList.toggle('show', totalQty > 0);
+
+    if (!CART.length){ wrap.innerHTML=''; emptyEl.classList.remove('hidden'); }
+    else {
+      emptyEl.classList.add('hidden');
+      wrap.innerHTML = CART.map(item => `
+        <div class="flex gap-3 items-center bg-white/50 rounded-2xl p-3">
+          <img src="${item.img || 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=200'}" class="w-16 h-16 rounded-xl object-cover">
+          <div class="flex-1 min-w-0">
+            <p class="font-semibold text-sm text-forest truncate">${escapeHtml(item.title)}</p>
+            <p class="text-xs text-ink/50">${money(item.price)}</p>
+            <div class="flex items-center gap-2 mt-1.5">
+              <button class="qtyBtn w-6 h-6 rounded-full bg-forest/10 text-forest flex items-center justify-center" data-title="${escapeAttr(item.title)}" data-d="-1">−</button>
+              <span class="text-sm font-medium w-4 text-center">${item.qty}</span>
+              <button class="qtyBtn w-6 h-6 rounded-full bg-forest/10 text-forest flex items-center justify-center" data-title="${escapeAttr(item.title)}" data-d="1">+</button>
+            </div>
+          </div>
+          <button class="removeBtn text-ink/30 hover:text-clay" data-title="${escapeAttr(item.title)}"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+        </div>
+      `).join('');
+      lucide.createIcons();
+      document.querySelectorAll('.qtyBtn').forEach(b => b.addEventListener('click', () => changeQty(b.dataset.title, Number(b.dataset.d))));
+      document.querySelectorAll('.removeBtn').forEach(b => b.addEventListener('click', () => removeItem(b.dataset.title)));
+    }
+
+    const subtotal = CART.reduce((s,c) => s + c.price * c.qty, 0);
+    const shipping = subtotal > 0 ? 200 : 0;
+    document.getElementById('subtotal').textContent = money(subtotal);
+    document.getElementById('shippingCost').textContent = money(shipping);
+    document.getElementById('totalCost').textContent = money(subtotal + shipping);
+  }
+
+  // -------- Cart drawer open/close --------
+  const drawer = document.getElementById('cartDrawer');
+  const overlay = document.getElementById('cartOverlay');
+  function openCart(){ drawer.classList.add('open'); overlay.classList.add('open'); }
+  function closeCartFn(){ drawer.classList.remove('open'); overlay.classList.remove('open'); }
+  document.getElementById('cartBtn').addEventListener('click', openCart);
+  document.getElementById('closeCart').addEventListener('click', closeCartFn);
+  overlay.addEventListener('click', closeCartFn);
+
+  // -------- Checkout modal --------
+  const checkoutOverlay = document.getElementById('checkoutOverlay');
+  document.getElementById('checkoutBtn').addEventListener('click', () => {
+    if (!CART.length){ toast('Your cart is empty', 'alert-circle'); return; }
+    checkoutOverlay.classList.remove('hidden');
+    checkoutOverlay.classList.add('flex');
+  });
+  document.getElementById('closeCheckout').addEventListener('click', () => {
+    checkoutOverlay.classList.add('hidden');
+    checkoutOverlay.classList.remove('flex');
+  });
+
+  document.getElementById('checkoutForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    const name = fd.get('name'), address = fd.get('address'), phone = fd.get('phone'), notes = fd.get('notes');
+
+    const subtotal = CART.reduce((s,c) => s + c.price * c.qty, 0);
+    const shipping = 200;
+    const total = subtotal + shipping;
+
+    let msg = `*New Order — Eila Foods*%0A%0A`;
+    msg += `*Customer:* ${name}%0A`;
+    msg += `*Phone:* ${phone}%0A`;
+    msg += `*Address:* ${address}%0A`;
+    if (notes) msg += `*Notes:* ${notes}%0A`;
+    msg += `%0A*Items:*%0A`;
+    CART.forEach(item => {
+      msg += `• ${item.title} × ${item.qty} — ${money(item.price * item.qty)}%0A`;
+    });
+    msg += `%0A*Subtotal:* ${money(subtotal)}%0A*Shipping:* ${money(shipping)}%0A*Total: ${money(total)}*`;
+
+    const url = `https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent(decodeURIComponent(msg))}`;
+    window.open(url, '_blank');
+    checkoutOverlay.classList.add('hidden');
+    checkoutOverlay.classList.remove('flex');
+  });
+
+  // -------- Hero animation --------
+  gsap.from('#heroText > *', { opacity:0, y:30, duration:0.8, stagger:0.12, ease:'power2.out' });
+  gsap.from('#heroStat', { opacity:0, x:40, duration:0.9, delay:0.3, ease:'power2.out' });
+  gsap.to('.blob', { y: 30, duration: 6, ease:'sine.inOut', yoyo:true, repeat:-1, stagger: 0.8 });
+
+  gsap.utils.toArray('.badge-reveal').forEach((el,i)=>{
+    gsap.from(el, { opacity:0, y:20, duration:0.6, delay:i*0.1, ease:'power2.out',
+      scrollTrigger:{ trigger: el, start:'top 92%' } });
+  });
+
+  // -------- Init --------
+  renderCart();
+  loadProducts();
+</script>
 </body>
 </html>
